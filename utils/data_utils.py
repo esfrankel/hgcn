@@ -88,7 +88,7 @@ def mask_edges(adj, val_prop, test_prop, seed):
     adj_train = adj_train + adj_train.T
     return adj_train, torch.LongTensor(train_edges), torch.LongTensor(train_edges_false), torch.LongTensor(val_edges), \
            torch.LongTensor(val_edges_false), torch.LongTensor(test_edges), torch.LongTensor(
-            test_edges_false)  
+            test_edges_false)
 
 
 def split_data(labels, val_prop, test_prop, seed):

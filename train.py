@@ -15,6 +15,7 @@ from config import parser
 from models.base_models import NCModel, LPModel
 from utils.data_utils import load_data
 from utils.train_utils import get_dir_name, format_metrics
+from utils.ricci_utils import compute_ricci
 
 
 def train(args):
@@ -51,6 +52,9 @@ def train(args):
         Model = NCModel
         args.n_classes = int(data['labels'].max() + 1)
         logging.info(f'Num classes: {args.n_classes}')
+    elif args.task == 'ricci':
+        # Model = RicciModel
+        compute_ricci(args, os.path.join(os.environ['DATAPATH'], args.dataset))
     else:
         args.nb_false_edges = len(data['train_edges_false'])
         args.nb_edges = len(data['train_edges'])
