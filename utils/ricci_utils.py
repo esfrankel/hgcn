@@ -23,9 +23,11 @@ def load_graph(dataset_str, use_feats, data_path):
     if dataset in ['cora', 'pubmed']:
         with open(os.path.join(data_path, "ind.{}.graph".format(dataset_str)), 'rb') as f:
             if sys.version_info > (3, 0):
-                G = pkl.load(f, encoding='latin1')
+                graph = pkl.load(f, encoding='latin1')
             else:
-                G = pkl.load(f)
+                graph = pkl.load(f)
+        adj = nx.adjacency_matrix(nx.from_dict_of_lists(graph))
+        G = nx.from_numpy_matrix(adj)
     elif dataset == 'disease_lp':
         pass
     else:
